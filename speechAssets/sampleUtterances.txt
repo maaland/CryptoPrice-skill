@@ -1,0 +1,7 @@
+CryptoIntent {Crypto}
+CryptoIntent price of {Crypto}
+CryptoIntent how much is one {Crypto}
+CryptoIntent what is the price of {Crypto}
+AMAZON.HelpIntent help
+AMAZON.HelpIntent what currencies do you support
+AMAZON.HelpIntent what cryptocurrencies do you support

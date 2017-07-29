@@ -1,0 +1,38 @@
+{
+	"intents": [ {
+		"intent": "CryptoIntent",
+		"slots": [
+			{
+				"name": "Bitcoin",
+				"price": "PRICE_OF_BITCOIN"
+			}
+
+
+		]
+
+
+
+	}, {
+		"intent": "AMAZON.YesIntent"
+	}, {
+		"intent": "AMAZON.NoIntent"
+	}, {
+		"intent": "AMAZON.HelpIntent"
+	}, {
+		"intent": "AMAZON.StopIntent"
+	}, {
+		"intent": "AMAZON.CancelIntent"
+	}
+
+
+
+
+
+
+
+
+	]
+
+
+
+}
