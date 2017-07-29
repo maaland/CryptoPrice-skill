@@ -79,13 +79,13 @@ function onIntent(intentRequest, session, callback) {
         handleCryptoResponse(intent, session, callback)
     } else if (intentName == "AMAZON.YesIntent") {
         handleYesResponse(intent,  session, callback)
-    } else if (intentName = "AMAZON.NoIntent") {
+    } else if (intentName == "AMAZON.NoIntent") {
         handleNoResponse(intent, session, callback)
-    } else if (intentName = "AMAZON.HelpIntent") {
+    } else if (intentName == "AMAZON.HelpIntent") {
         handleGetHelpRequest(intent, session, callback)
-    } else if (intentName = "AMAZON.StopIntent") {
+    } else if (intentName == "AMAZON.StopIntent") {
         handleFinishSessionRequest(intent, session, callback)
-    } else if (intentName = "AMAZON.CancelIntent") {
+    } else if (intentName == "AMAZON.CancelIntent") {
         handleFinishSessionRequest(intent, session, callback)
     } else {
         throw "Invalid intent"
@@ -184,9 +184,9 @@ function handleGetHelpRequest(intent, session, callback) {
 
     }
 
-    var speechOutput = "I can tell you the price of Bitcoin and Ether. Which one you want to know the price of?"
+    var speechOutput = "I can tell you the price of Bitcoin and Ether."
 
-    var repromptText = speechOutput
+    var repromptText = "Which one you want to know the price of?"
 
     var shouldEndSession = false
 
