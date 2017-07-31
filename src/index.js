@@ -8,6 +8,9 @@ var cryptocurrencies = {
     }, 
     "ether": {
         "price": "456"
+    },
+    "ethereum": {
+        "price": "789"
     }
 }
 
@@ -121,8 +124,14 @@ function getWelcomeResponse(callback) {
 
 
 function handleCryptoResponse(intent, session, callback) {
+    if (!intent.slots.Crypto.value) {
+        handleCryptoResponseError(intent, session, callback)
+    }
     var crypto = intent.slots.Crypto.value.toLowerCase()
 
+    if (!cryptocurrencies[crypto]) {
+        handleCryptoResponseError(intent, session, callback)
+    }
 
     getJSON(function(data) {
         if (data != "ERROR") {
@@ -133,26 +142,26 @@ function handleCryptoResponse(intent, session, callback) {
                 price = Number(data.USDT_ETH.last)
             } 
         } 
-        // callback(session.attributes, buildSpeechletResponseWithoutCard(speechOutput, "", true))
-        if (!cryptocurrencies[crypto]) {
-        var speechOutput = "I don't know the price of that crypto. Ask about Bitcoin or Ether"
-        var repromptText = "Try asking about Bitcoin or Ether"
-        var header = "Unknown crypto"
-    } else {
         var speechOutput = "The price of " + capitalizeFirst(crypto) + " is " + Math.round(price) + " USD. Do you need the price of another crypto?"
         var repromptText = "Do you need the price of another crypto?"
         var header = capitalizeFirst(crypto)
-    }
+        var shouldEndSession = false
 
-    var shouldEndSession = false
-
-    callback(session.attributes, buildSpeechletResponse(header, speechOutput, repromptText, shouldEndSession))
+        callback(session.attributes, buildSpeechletResponse(header, speechOutput, repromptText, shouldEndSession))
     })
-
-    
 
 
 }
+
+function handleCryptoResponseError(intent, session, callback) {
+    var speechOutput = "I don't know the price of that crypto. Try asking about Bitcoin or Ether"
+    var reprompt = speechOutput
+    var header = "Unknown crypto";
+    var shouldEndSession = false;
+    callback(session.attributes, buildSpeechletResponse(header, speechOutput, reprompt, shouldEndSession));
+}
+
+
 
 function url() {
     return "https://poloniex.com/public?command=returnTicker"
@@ -184,9 +193,9 @@ function handleGetHelpRequest(intent, session, callback) {
 
     }
 
-    var speechOutput = "I can tell you the price of Bitcoin and Ether."
+    var speechOutput = "I can tell you the price of Bitcoin and Ether. Which one do you want to know the price of?"
 
-    var repromptText = "Which one you want to know the price of?"
+    var repromptText = "I can tell you the price of Bitcoin and Ether. Which one do you want to know the price of?"
 
     var shouldEndSession = false
 
